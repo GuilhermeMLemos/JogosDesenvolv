@@ -8,11 +8,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverUI; //referencia ao objeto de UI do game over
 
-    public string nextLevel = "Level02";
-    public int levelToUnlock = 2;
-    
-    public SceneFader sceneFader;
-    
+    public GameObject completeLevelUI;
+
     /*como GameIsOver e variavel estatica, quando ela e alterada no final do jogo,
     ela nao e alterada novamente e sera passada como true na proxima scene, gerando um erro
     por isso e criado um metodo Start para setar essa variavel como false todo inicio de cada scene*/
@@ -49,10 +46,9 @@ public class GameManager : MonoBehaviour
     public void WinLevel()
     {
         if(GameIsOver)
-            return;
+            return; 
 
-        Debug.Log("NIVEL VENCIDO");
-        PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        sceneFader.FadeTo(nextLevel);
+        GameIsOver = true;
+        completeLevelUI.SetActive(true);    
     }
 }

@@ -1,19 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public Text roundsText;
+    
 
     public string menuSceneName = "MainMenu";
 
     public SceneFader sceneFader;
-
-    void OnEnable()  //metodo do unity similar ao Start() porem so e chamado quando o objeto esta ativo
-    {
-        roundsText.text = PlayerStats.Rounds.ToString();  //alterando texto da UI de rounds sobrevividos
-    }
 
     public void Retry()  //funcionalidade do botao Retry
     {
