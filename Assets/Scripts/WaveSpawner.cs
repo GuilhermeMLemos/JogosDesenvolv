@@ -15,19 +15,28 @@ public class WaveSpawner : MonoBehaviour
 
     public Text waveCountdownText;  //referencia para o texto do countdown na UI
 
+    public GameManager gameManager;
+
     private int waveIndex = 0;  //index da onda de inimigo
     
-    private void Start()
+    void Start()
     {
+        EnemiesAlive = 0;
         this.enabled = true;
     }
     
     void Update ()
     {
-        if(EnemiesAlive > 0)  //proxima onda de inimigos so comecara caso nao haja mais inimigo
+        if(waveIndex == waves.Length && EnemiesAlive == 0)
         {
-            return;
+            Win();
         }
+
+        if(EnemiesAlive > 0)  //proxima onda de inimigos so comecara caso nao haja mais inimigo
+            return;
+
+        if(waveIndex == waves.Length)
+            return;
 
         if (countdown <= 0f)  //caso o countdown seja zero
         {
@@ -49,6 +58,8 @@ public class WaveSpawner : MonoBehaviour
 
         Wave wave = waves[waveIndex];
 
+        EnemiesAlive = wave.spawnCount;
+
         for (int i = 0; i < wave.spawnCount; i++)  //spawna uma quantidade de inimigos de acordo com spawnCount na classe Wave
         {
             SpawnEnemy(wave.enemy);  //spawnando o inimigo determinado na classe Wave
@@ -56,22 +67,16 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveIndex++;  //aumentando index da onda
-
-        if(waveIndex == waves.Length)
-        {
-            Win();
-        }
     }
 
     void SpawnEnemy (GameObject enemy)  //funcao que spawna recebe um tipo de inimigo
     {
         Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);  //instanciando o objeto do inimigo nas posicoes do spawn
-        EnemiesAlive++;
     }
 
     void Win()
     {
-        Debug.Log("NIVEL VENCIDO");
+        gameManager.WinLevel();
         this.enabled = false;  //desativa esse script
     }
 }

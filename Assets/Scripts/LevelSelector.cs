@@ -5,17 +5,22 @@ public class LevelSelector : MonoBehaviour
 {
     public SceneFader sceneFader;
 
-    /*
+    
     public Button[] levelButtons;
 
     void Start()
     {
-        for(int i = 0; i < levelButtons.Length; i++)           //sera implementado depois
+        int levelReached = PlayerPrefs.GetInt("levelReached", 1);
+
+        for(int i = 0; i < levelButtons.Length; i++)           
         {
-            levelButtons[i].interactable = false;
+            if(i + 1 > levelReached)
+            {
+                levelButtons[i].interactable = false;
+            } 
         }
     } 
-    */
+    
 
     public void Select(string levelName)
     {

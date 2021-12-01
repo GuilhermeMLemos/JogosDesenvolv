@@ -24,7 +24,7 @@ public class Node : MonoBehaviour
         rend = GetComponent<Renderer>();
         startColor = rend.material.color; //armazenando a cor original do Node
 
-        buildManager = BuildManager.instance; //instanciando o Build Manager
+        buildManager = BuildManager.instance; //pegando a unica instancia do Build Manager
     }
 
     public Vector3 GetBuildPosition() //metodo que retorna a posicao exata do Node mais um offset
